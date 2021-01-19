@@ -61,19 +61,27 @@
 
 
 ; linear recursive sum (pops stack on too big)
-(defn sum [term a next b]
+(defn lin-sum [term a next b]
   (if (> a b)
     0
     (+
      (term a)
-     (sum term (next a) next b))))
+     (lin-sum term (next a) next b))))
 
 (defn cube [x] (* x x x))
 
 (comment
-  (sum cube 1 inc 10)
+  (lin-sum cube 1 inc 10)
 
   .)
+
+; iterative sum instead of linear recursive
+(defn sum [term a next b]
+  (loop [a a
+         result 0]
+    (if (> a b)
+      result 
+      (recur (next a) (+ result (term a))))))
 
 (defn pi-sum [a b]
   (let [pi-term (fn [x] (/ 1.0 (* x (+ x 2))))
@@ -81,7 +89,7 @@
     (sum pi-term a pi-next b)))
 
 (comment
-  (* 8 (pi-sum 1 10000))
+  (* 8 (pi-sum 1 100000))
 
   .)
 
