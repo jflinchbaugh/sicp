@@ -22,6 +22,18 @@
 
   .)
 
+(defn gcd [a b]
+  (if (= b 0)
+    a
+    (gcd b (mod a b))))
+
+(comment
+
+  (gcd 10 15)
+
+  .)
+
+
 (def first-denomination {1 1, 2 5, 3 10, 4 25, 5 50})
 
 (def cc (memoize (fn [amount kinds-of-coins]
