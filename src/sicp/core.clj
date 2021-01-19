@@ -101,17 +101,9 @@
 
 
 (comment
-  (integral cube 0 1 0.001)
+  (integral cube 0 1 0.00000001)
 
   .)
-
-; iterative sum instead of linear recursive
-(defn sum [term a next b]
-  (loop [a a
-         result 0]
-    (if (> a b)
-      result 
-      (recur (next a) (+ result (term a))))))
 
 (comment
 
@@ -160,10 +152,18 @@
 (defn my-sqrt [x]
   (fixed-point-of-transform (fn [y] (- (* y) x)) #(newton-transform % 0.0001) 0.0001 1.0))
 
+(defn my-sqrt [x] (fixed-point #(/ x %) 0.0001 1.0))
+
+(defn cos [a] (Math/cos a))
+
 (comment
   ((deriv cube 0.00001) 5)
 
 
-  (my-sqrt 3)
+
+  (fixed-point Math/cos 0.1 1.0)
+
+
+  (my-sqrt 2)
 
   .)
