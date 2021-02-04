@@ -167,3 +167,40 @@
   (my-sqrt 2)
 
   .)
+
+
+(defn make-rat [n d] (list n d))
+
+(defn numer [x] (first x))
+(defn denom [x] (second x))
+(defn print-rat [x] (str (numer x) "/" (denom x)))
+
+(comment
+  (print-rat (make-rat 1 2))
+
+
+  .)
+
+
+(defn count-leaves [x]
+  (cond
+    (not (seq? x)) 1
+    (empty? x) 0
+    :else (+
+            (count-leaves (first x))
+            (count-leaves (rest x)))))
+
+(comment
+
+  (def x (cons (list 1 2) (list 3 4)))
+
+  (seq? 1)
+
+  (count x)
+;; => 3
+
+  (empty? nil)
+
+  (count-leaves x)
+ 
+  .)
