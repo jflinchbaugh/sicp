@@ -278,3 +278,21 @@
    (filter (comp is-prime? first)))
 
   .)
+
+(defn permutations [c]
+  (prn c)
+  (if (empty? c)
+    (list nil)
+    (mapcat
+      (fn [cx]
+        (map
+          (fn [cp] (cons cx cp)) (permutations (remove #{cx} c)))) c)))
+
+(comment
+
+  (permutations [1 2 3])
+
+  (let [l [1 2 3]]
+    (map (fn [x] (remove #{x} l)) l))
+
+  .)
