@@ -33,7 +33,6 @@
 
   .)
 
-
 (def first-denomination {1 1, 2 5, 3 10, 4 25, 5 50})
 
 (def cc (memoize (fn [amount kinds-of-coins]
@@ -61,6 +60,8 @@
 
 
 ; linear recursive sum (pops stack on too big)
+
+
 (defn lin-sum [term a next b]
   (if (> a b)
     0
@@ -80,7 +81,7 @@
   (loop [a a
          result 0]
     (if (> a b)
-      result 
+      result
       (recur (next a) (+ result (term a))))))
 
 (defn pi-sum [a b]
@@ -96,9 +97,8 @@
 (defn integral [f a b dx]
   (let [add-dx (fn [x] (+ x dx))]
     (*
-      (sum f (+ a (/ dx 2.0)) add-dx b)
-      dx)))
-
+     (sum f (+ a (/ dx 2.0)) add-dx b)
+     dx)))
 
 (comment
   (integral cube 0 1 0.00000001)
@@ -119,8 +119,8 @@
 (defn deriv [g dx]
   (fn [x]
     (/
-      (- (g (+ x dx)) (g x))
-      dx)))
+     (- (g (+ x dx)) (g x))
+     dx)))
 
 (defn newton-transform [g dx]
   (fn [x]
@@ -159,15 +159,11 @@
 (comment
   ((deriv cube 0.00001) 5)
 
-
-
   (fixed-point Math/cos 0.1 1.0)
-
 
   (my-sqrt 2)
 
   .)
-
 
 (defn make-rat [n d] (list n d))
 
@@ -178,17 +174,15 @@
 (comment
   (print-rat (make-rat 1 2))
 
-
   .)
-
 
 (defn count-leaves [x]
   (cond
     (not (seq? x)) 1
     (empty? x) 0
     :else (+
-            (count-leaves (first x))
-            (count-leaves (rest x)))))
+           (count-leaves (first x))
+           (count-leaves (rest x)))))
 
 (comment
 
@@ -202,40 +196,39 @@
   (empty? nil)
 
   (count-leaves x)
- 
+
   .)
 
 (comment ex 2.25
 
-  (-> '(1 3 (5 7) 9)
-    rest
-    rest
-    first
-    rest
-    first)
+         (-> '(1 3 (5 7) 9)
+             rest
+             rest
+             first
+             rest
+             first)
 
-  (-> '((7))
-    first
-    first)
+         (-> '((7))
+             first
+             first)
 
-  (-> '(1 (2 (3 (4 (5 (6 7))))))
-    rest
-    first
-    rest
-    first
-    rest
-    first
-    rest
-    first
-    rest
-    first
-    rest
-    first
-    )
+         (-> '(1 (2 (3 (4 (5 (6 7))))))
+             rest
+             first
+             rest
+             first
+             rest
+             first
+             rest
+             first
+             rest
+             first
+             rest
+             first)
 
-  (reverse [1 2 3])
+         (reverse [1 2 3])
 
-  .)
+         .)
 
 (defn deep-reverse [coll]
   (if (coll? coll)
@@ -245,5 +238,43 @@
 (comment
 
   (deep-reverse [1 2 [3 [4 5 6]]])
+
+  .)
+
+(defn fringe [tree]
+  (flatten tree))
+
+(comment
+
+  (fringe [[0 1] 2 3 [4 5 [6 7]]])
+
+  .)
+
+(defn pair-sums [n]
+  (let [is (range 1 (inc n))
+        js (range 1 (inc n))]
+    (mapcat
+     (fn [i]
+       (map
+        (fn [j]
+          (list (+ i j) i j))
+        is))
+     is)))
+
+(defn is-prime? [n]
+  (>= 2
+      (count
+       (filter
+        (fn [i] (zero? (mod n i)))
+        (range 1 (inc n))))))
+
+(comment
+
+  (is-prime? 4)
+
+  (->>
+   6
+   pair-sums
+   (filter (comp is-prime? first)))
 
   .)
