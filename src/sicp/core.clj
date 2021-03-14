@@ -250,16 +250,17 @@
 
   .)
 
-(defn pair-sums [n]
-  (let [is (range 1 (inc n))
-        js (range 1 (inc n))]
+(defn unique-pairs [n]
     (mapcat
-     (fn [i]
-       (map
-        (fn [j]
-          (list (+ i j) i j))
-        is))
-     is)))
+      (fn [i]
+        (map
+          (fn [j]
+            (list i j))
+          (range i (inc n))))
+      (range 1 (inc n))))
+
+(defn pair-sums [n]
+  (map (fn [p] (cons (apply + p) p))(unique-pairs n)))
 
 (defn is-prime? [n]
   (>= 2
@@ -269,6 +270,8 @@
         (range 1 (inc n))))))
 
 (comment
+
+  (unique-pairs 6)
 
   (is-prime? 4)
 
