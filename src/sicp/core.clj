@@ -204,3 +204,46 @@
   (count-leaves x)
  
   .)
+
+(comment ex 2.25
+
+  (-> '(1 3 (5 7) 9)
+    rest
+    rest
+    first
+    rest
+    first)
+
+  (-> '((7))
+    first
+    first)
+
+  (-> '(1 (2 (3 (4 (5 (6 7))))))
+    rest
+    first
+    rest
+    first
+    rest
+    first
+    rest
+    first
+    rest
+    first
+    rest
+    first
+    )
+
+  (reverse [1 2 3])
+
+  .)
+
+(defn deep-reverse [coll]
+  (if (coll? coll)
+    (map deep-reverse (reverse coll))
+    coll))
+
+(comment
+
+  (deep-reverse [1 2 [3 [4 5 6]]])
+
+  .)
