@@ -299,3 +299,17 @@
     (map (fn [x] (remove #{x} l)) l))
 
   .)
+
+(defn fringe [x]
+  (cond
+    (not (seq? x)) x
+    (empty? x) 0
+    :else (cons 
+            (fringe (first x))
+            (fringe (rest x)))))
+
+(comment
+
+  (fringe (list 1 (list 2 3) (list (list 4 5) 6)))
+
+  .)
