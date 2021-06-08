@@ -283,7 +283,6 @@
   .)
 
 (defn permutations [c]
-  (prn c)
   (if (empty? c)
     (list nil)
     (mapcat
@@ -293,7 +292,7 @@
 
 (comment
 
-  (permutations [1 2 3])
+  (permutations [1 2 3]);; => ((1 2 3) (1 3 2) (2 1 3) (2 3 1) (3 1 2) (3 2 1))
 
   (let [l [1 2 3]]
     (map (fn [x] (remove #{x} l)) l))
