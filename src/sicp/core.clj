@@ -340,3 +340,8 @@
   (accumulate cons [] [1 2 3 4])
 
   )
+
+(defn enumerate-interval
+  [low high]
+  (if (> low high) []
+      (cons low (enumerate-interval (inc low) high))))

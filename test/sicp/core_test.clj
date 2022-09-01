@@ -25,3 +25,9 @@
   (is (= [1 2] (fringe [1 2])))
   (is (= [1 2] (fringe [1 [2]])))
   (is (= [1 2 3 4 5 6] (fringe [1 [2 3] [[4 5] 6]]))))
+
+(deftest test-enumerate-interval
+  (is (= [] (enumerate-interval 1 0)))
+  (is (= [1] (enumerate-interval 1 1)))
+  (is (= [1 2] (enumerate-interval 1 2)))
+  )
