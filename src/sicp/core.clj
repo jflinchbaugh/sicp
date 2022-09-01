@@ -251,16 +251,16 @@
   .)
 
 (defn unique-pairs [n]
-    (mapcat
-      (fn [i]
-        (map
-          (fn [j]
-            (list i j))
-          (range i (inc n))))
-      (range 1 (inc n))))
+  (mapcat
+   (fn [i]
+     (map
+      (fn [j]
+        (list i j))
+      (range i (inc n))))
+   (range 1 (inc n))))
 
 (defn pair-sums [n]
-  (map (fn [p] (cons (apply + p) p))(unique-pairs n)))
+  (map (fn [p] (cons (apply + p) p)) (unique-pairs n)))
 
 (defn is-prime? [n]
   (>= 2
@@ -286,9 +286,9 @@
   (if (empty? c)
     (list nil)
     (mapcat
-      (fn [cx]
-        (map
-          (fn [cp] (cons cx cp)) (permutations (remove #{cx} c)))) c)))
+     (fn [cx]
+       (map
+        (fn [cp] (cons cx cp)) (permutations (remove #{cx} c)))) c)))
 
 (comment
 
@@ -300,15 +300,28 @@
   .)
 
 (defn fringe [x]
-  (cond
+  (prn x)
+  (if
     (not (seq? x)) x
-    (empty? x) 0
-    :else (cons 
-            (fringe (first x))
-            (fringe (rest x)))))
+    (list (fringe (first x)) (fringe (rest x)))))
 
 (comment
 
   (fringe (list 1 (list 2 3) (list (list 4 5) 6)))
 
+  (fringe (list 1 2))
+  (:require  [clojure.test :as t])
   .)
+
+(defn reverse-right [lst]
+  (reduce conj '() lst)
+  )
+
+(comment
+  (reverse-right [1 2 3])
+
+
+
+  .)
+
+
