@@ -29,5 +29,10 @@
 (deftest test-enumerate-interval
   (is (= [] (enumerate-interval 1 0)))
   (is (= [1] (enumerate-interval 1 1)))
-  (is (= [1 2] (enumerate-interval 1 2)))
+  (is (= [1 2] (enumerate-interval 1 2))))
+
+(deftest test-map'
+  (is (= [] (map' inc [])))
+  (is (= [2] (map' inc [1])))
+  (is (= [2 3] (map' inc [1 2])))
   )

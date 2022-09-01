@@ -345,3 +345,6 @@
   [low high]
   (if (> low high) []
       (cons low (enumerate-interval (inc low) high))))
+
+(defn map' [op sequence]
+  (accumulate (fn [x y] (cons (op x) y)) [] sequence))
