@@ -15,4 +15,5 @@
     (is (= 1 (accumulate * 1 [])))
     (is (= 6 (accumulate * 1 [1 2 3])))
     (is (= 1 (accumulate * 1 nil)))
-    (is (= 6 (accumulate + 0 [1 2 3])))))
+    (is (= 6 (accumulate + 0 [1 2 3])))
+    (is (= [1 2 3 4] (accumulate cons [] [1 2 3 4])))))
