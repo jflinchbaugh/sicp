@@ -299,18 +299,21 @@
 
   .)
 
-(defn fringe [x]
-  (prn x)
-  (if
-    (not (seq? x)) x
-    (list (fringe (first x)) (fringe (rest x)))))
+(defn fringe [tree]
+  (cond
+    (nil? tree) []
+    (not (coll? tree)) [tree]
+    (empty? tree) []
+    :else (concat (fringe (first tree)) (fringe (rest tree)))
+    ))
 
 (comment
 
-  (fringe (list 1 (list 2 3) (list (list 4 5) 6)))
+  (not (coll? 1))
 
+  (fringe (list 1 (list 2 3) (list (list 4 5) 6)))
   (fringe (list 1 2))
-  (:require  [clojure.test :as t])
+
   .)
 
 (defn reverse-right [lst]

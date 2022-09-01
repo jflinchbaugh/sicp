@@ -17,3 +17,11 @@
     (is (= 1 (accumulate * 1 nil)))
     (is (= 6 (accumulate + 0 [1 2 3])))
     (is (= [1 2 3 4] (accumulate cons [] [1 2 3 4])))))
+
+(deftest test-fringe
+  (is (= [] (fringe nil)))
+  (is (= [] (fringe [])))
+  (is (= [1] (fringe 1)))
+  (is (= [1 2] (fringe [1 2])))
+  (is (= [1 2] (fringe [1 [2]])))
+  (is (= [1 2 3 4 5 6] (fringe [1 [2 3] [[4 5] 6]]))))
