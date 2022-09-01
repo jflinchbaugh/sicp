@@ -348,3 +348,6 @@
 
 (defn map' [op sequence]
   (accumulate (fn [x y] (cons (op x) y)) [] sequence))
+
+(defn map'' [op sequence]
+  (reduce (fn [a v] (conj a (op v))) [] sequence))
