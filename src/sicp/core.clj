@@ -325,3 +325,13 @@
   .)
 
 
+(defn accumulate [op initial sequence]
+  (if (empty? sequence)
+    initial
+    (op (first sequence) (accumulate op initial (rest sequence)))))
+
+
+(comment
+  (accumulate cons [] [1 2 3 4])
+
+  )
