@@ -307,6 +307,8 @@
     :else (concat (fringe (first tree)) (fringe (rest tree)))
     ))
 
+(def enumerate-tree fringe)
+
 (comment
 
   (not (coll? 1))
