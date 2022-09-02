@@ -241,15 +241,6 @@
 
   .)
 
-(defn fringe [tree]
-  (flatten tree))
-
-(comment
-
-  (fringe [[0 1] 2 3 [4 5 [6 7]]])
-
-  .)
-
 (defn unique-pairs [n]
   (mapcat
    (fn [i]
