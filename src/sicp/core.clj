@@ -342,3 +342,20 @@
 
 (defn map'' [op sequence]
   (reduce (fn [a v] (conj a (op v))) [] sequence))
+
+(defn append [seq1 seq2]
+  (accumulate cons seq2 seq1))
+
+(defn length [sequence]
+  (accumulate (fn [a b] (inc b)) 0 sequence))
+
+(defn length' [sequence]
+  (reduce (fn [a b] (inc a)) 0 sequence))
+
+(comment
+  (append [1 2 3] [4 5 6])
+
+  (length [1 2 3 4 5])
+  (length' [1 2 3 4 5])
+
+  )
