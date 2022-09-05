@@ -320,12 +320,10 @@
 
   .)
 
-
 (defn accumulate [op initial sequence]
   (if (empty? sequence)
     initial
     (op (first sequence) (accumulate op initial (rest sequence)))))
-
 
 (comment
   (accumulate cons [] [1 2 3 4])
@@ -359,3 +357,29 @@
   (length' [1 2 3 4 5])
 
   )
+
+(defn horner-eval [x coeff-seq]
+  (accumulate
+    (fn [this-coeff higher-terms]
+      (+ (* higher-terms x) this-coeff))
+    0
+    coeff-seq))
+
+(defn horner-eval' [x coeff-seq]
+  (reduce
+    (fn [higher-terms this-coeff]
+      (+ (* higher-terms x) this-coeff))
+    0
+    (reverse coeff-seq)))
+
+(comment
+
+  (horner-eval 2 '(1 3 0 5 0 1))
+
+  (let [x 2]
+    (+ 1 (* 3 x) (* 5 (Math/pow x 3)) (Math/pow x 5)))
+
+  (let [x 2]
+    (+ (* (+ (* (+ (* (+ (* (+ (* (+ 1) x) 0) x) 5) x) 0) x) 3) x) 1))
+
+  .)

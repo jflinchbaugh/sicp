@@ -40,3 +40,9 @@
   (is (= [] (map'' inc [])))
   (is (= [2] (map'' inc [1])))
   (is (= [2 3] (map'' inc [1 2]))))
+
+(deftest test-horner-eval
+  (is (= 79 (horner-eval 2 [1 3 0 5 0 1]))))
+
+(deftest test-horner-eval'
+  (is (= 79 (horner-eval' 2 [1 3 0 5 0 1]))))
