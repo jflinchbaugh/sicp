@@ -390,3 +390,29 @@
     (cons
       (accumulate op init (first seqs))
       (accumulate-n op init (rest seqs)))))
+
+(defn fold-left [op initial sequence]
+  (loop [result initial
+         cdr sequence]
+    (if (empty? cdr)
+      result
+      (recur (op result (first cdr)) (rest cdr)))))
+
+(defn fold-right [op initial sequence]
+  (if (empty? sequence)
+    initial
+    (op (first sequence) (accumulate op initial (rest sequence)))))
+
+(comment
+
+  (fold-right / 1 [1 2 3])
+  ;; => 3/2
+
+  (fold-left / 1 [1 2 3])
+  ;; => 1/6
+
+  (reduce / 1 [1 2 3])
+  ;; => 1/6
+
+
+  .)
