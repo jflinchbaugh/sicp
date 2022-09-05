@@ -46,3 +46,6 @@
 
 (deftest test-horner-eval'
   (is (= 79 (horner-eval' 2 [1 3 0 5 0 1]))))
+
+(deftest test-accumulate-n
+  (is (= [10 20 30] (accumulate-n + 0 [[2 3 5] [1 2 17] [5 10 15]]))))

@@ -383,3 +383,10 @@
     (+ (* (+ (* (+ (* (+ (* (+ (* (+ 1) x) 0) x) 5) x) 0) x) 3) x) 1))
 
   .)
+
+(defn accumulate-n [op init seqs]
+  (if (empty? (first seqs))
+    []
+    (cons
+      (accumulate op init (first seqs))
+      (accumulate-n op init (rest seqs)))))
