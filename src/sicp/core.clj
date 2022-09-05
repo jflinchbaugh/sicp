@@ -416,3 +416,52 @@
 
 
   .)
+
+(defn prime-sum? [[x y]]
+  (is-prime? (+ x y)))
+
+(defn make-pair-sum [[x y]]
+  [x y (+ x y)])
+
+(defn prime-sum-pairs [n]
+  (map make-pair-sum
+    (filter prime-sum?
+      (mapcat
+        (fn [i]
+          (map (fn [j] [i j])
+            (range 1 i)))
+        (range 1 (inc n))))))
+
+(defn prime-sum-pairs' [n]
+  (->> n
+    inc
+    (range 1)
+    (mapcat
+      (fn [i]
+        (map (fn [j] [i j])
+          (range 1 i))))
+    (filter prime-sum?)
+    (map make-pair-sum)))
+
+(defn prime-sum-pairs'' [n]
+  (->> n
+    inc
+    (range 1)
+    (mapcat
+      (fn [i]
+        (map (fn [j] [i j])
+          (range 1 i))))
+    (map make-pair-sum)
+    (filter (fn [[i j sum]] (is-prime? sum)))))
+
+(comment
+
+  (prime-sum? [1 3])
+
+  (make-pair-sum [1 2])
+
+  (prime-sum-pairs 6)
+
+  (prime-sum-pairs'' 6)
+
+  .)
