@@ -454,6 +454,13 @@
     (map make-pair-sum)
     (filter (fn [[i j sum]] (is-prime? sum)))))
 
+(defn prime-sum-pairs''' [n]
+  (->>
+    n
+    unique-pairs
+    (map make-pair-sum)
+    (filter (fn [[i j sum]] (is-prime? sum)))))
+
 (comment
 
   (prime-sum? [1 3])
@@ -463,5 +470,7 @@
   (prime-sum-pairs 6)
 
   (prime-sum-pairs'' 6)
+
+  (prime-sum-pairs''' 6)
 
   .)
