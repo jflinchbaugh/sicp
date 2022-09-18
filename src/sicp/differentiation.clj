@@ -3,25 +3,34 @@
 (defn error [m exp]
   (throw (Exception. (str m " " exp))))
 
-(defn variable? [e])
+(defn variable? [x] (symbol? x))
 
-(defn same-variable? [v1 v2])
+(defn same-variable? [v1 v2]
+  (and (variable? v1) (variable? v2) (= v1 v2)))
 
-(defn sum? [e])
+(defn make-sum [a1 a2]
+  (list '+ a1 a2))
 
-(defn addend [e])
+(defn sum? [x]
+  (and (list? x) (= '+ (first x))))
 
-(defn augend [e])
+(defn addend [s]
+  (second s))
 
-(defn make-sum [a1 a2])
+(defn augend [s]
+  (nth s 2))
 
-(defn product? [e])
+(defn make-product [m1 m2]
+  (list '* m1 m2))
 
-(defn multiplier [e])
+(defn product? [x]
+  (and (list? x) (= '* (first x))))
 
-(defn multiplicand [e])
+(defn multiplier [p]
+  (second p))
 
-(defn make-product [m1 m2])
+(defn multiplicand [p]
+  (nth p 2))
 
 (defn deriv [exp var]
   (cond
@@ -32,3 +41,16 @@
                      (make-product (multiplier exp) (deriv (multiplicand exp) var))
                      (make-product (deriv (multiplier exp) var) (multiplicand exp)))
     :else (error "unknown expression type -- DERIV" exp)))
+
+(comment
+
+  (deriv '(+ x 3) 'x)
+  ;; => (+ 1 0)
+
+  (deriv '(* x y) 'x)
+  ;; => (+ (* x 0) (* 1 y))
+
+  (deriv '(* (* x y) (+ x 3)) 'x)
+  ;; => (+ (* (* x y) (+ 1 0)) (* (+ (* x 0) (* 1 y)) (+ x 3)))
+
+  .)
