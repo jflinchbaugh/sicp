@@ -11,7 +11,8 @@
 (defn make-sum [a1 a2]
   (cond
     (and (number? a1) (zero? a1)) a2
-    (and (number? a2)(zero? a2)) a1
+    (and (number? a2) (zero? a2)) a1
+    (and (number? a1) (number? a2)) (+ a1 a2)
     :else (list '+ a1 a2)))
 
 (defn sum? [x]
@@ -29,6 +30,7 @@
     (and (number? m2) (zero? m2)) 0
     (and (number? m1) (= 1 m1)) m2
     (and (number? m2) (= 1 m2)) m1
+    (and (number? m1) (number? m2)) (* m1 m2)
     :else (list '* m1 m2)))
 
 (defn product? [x]
@@ -63,5 +65,8 @@
   (deriv '(* (* x y) (+ x 3)) 'x)
   ;; => (+ (* x y) (* y (+ x 3)))
   ;; => (+ (* (* x y) (+ 1 0)) (* (+ (* x 0) (* 1 y)) (+ x 3)))
+
+  (deriv '(+ (* x 2) (* x 7)) 'x)
+  ;; => 9
 
   .)
