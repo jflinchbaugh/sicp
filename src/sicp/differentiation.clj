@@ -28,9 +28,9 @@
   (cond
     (and (number? m1) (zero? m1)) 0
     (and (number? m2) (zero? m2)) 0
+    (and (number? m1) (number? m2)) (* m1 m2)
     (and (number? m1) (= 1 m1)) m2
     (and (number? m2) (= 1 m2)) m1
-    (and (number? m1) (number? m2)) (* m1 m2)
     :else (list '* m1 m2)))
 
 (defn product? [x]
@@ -55,16 +55,16 @@
 (comment
 
   (deriv '(+ x 3) 'x)
-  ;; => 1
   ;; => (+ 1 0)
+  ;; => 1
 
   (deriv '(* x y) 'x)
+  ;; => (+ (* x y) (* y (+ x 3)))
   ;; => y
-  ;; => (+ (* x 0) (* 1 y))
 
   (deriv '(* (* x y) (+ x 3)) 'x)
-  ;; => (+ (* x y) (* y (+ x 3)))
   ;; => (+ (* (* x y) (+ 1 0)) (* (+ (* x 0) (* 1 y)) (+ x 3)))
+  ;; => (+ (* x y) (* y (+ x 3)))
 
   (deriv '(+ (* x 2) (* x 7)) 'x)
   ;; => 9
